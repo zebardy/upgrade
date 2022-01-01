@@ -196,6 +196,7 @@ func (c *CSPCMigrator) findBDforDevlink(devlink, hostname string) (string, error
 			for _, link := range devLinks.Links {
 				klog.Infof("Comparing devLink %s with link %s", devlink, link)
 				if strings.Contains(devlink, link) {
+					klog.Infof("devLink %s matches with link %s")
 					ok, err := c.verifyBDStatus(bd, hostname)
 					if err != nil {
 						return "", err
@@ -211,6 +212,7 @@ func (c *CSPCMigrator) findBDforDevlink(devlink, hostname string) (string, error
 }
 
 func (c *CSPCMigrator) verifyBDStatus(bdObj v1alpha1.BlockDevice, hostName string) (bool, error) {
+	klog.Infof("verifyBDStatus %s on hostname %s", bdObj.Name, hostName)
 	if bdObj.Status.State == v1alpha1.BlockDeviceActive {
 		nodes, err := c.KubeClientset.CoreV1().Nodes().
 			List(context.TODO(), metav1.ListOptions{
