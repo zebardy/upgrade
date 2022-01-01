@@ -170,7 +170,7 @@ func (c *CSPCMigrator) correctCSPBDs(spcObj *apis.StoragePoolClaim, cspObj apis.
 }
 
 func (c *CSPCMigrator) findBDforDevlink(devlink, hostname string) (string, error) {
-	klog.Infof("findBDforDevlink %s for hostname %s", devLink, hostname)
+	klog.Infof("findBDforDevlink %s for hostname %s", devlink, hostname)
 	bds, err := c.OpenebsClientset.OpenebsV1alpha1().
 		BlockDevices(c.OpenebsNamespace).
 		List(context.TODO(), metav1.ListOptions{
@@ -181,7 +181,7 @@ func (c *CSPCMigrator) findBDforDevlink(devlink, hostname string) (string, error
 	}
 	for _, bd := range bds.Items {
 		if bd.Spec.Path != "" {
-			klog.Infof("Comparing devLink %s with path %s", devLink, bd.Spec.Path)
+			klog.Infof("Comparing devLink %s with path %s", devink, bd.Spec.Path)
 			if strings.Contains(devlink, bd.Spec.Path) {
 				ok, err := c.verifyBDStatus(bd, hostname)
 				if err != nil {
@@ -194,7 +194,7 @@ func (c *CSPCMigrator) findBDforDevlink(devlink, hostname string) (string, error
 		}
 		for _, devLinks := range bd.Spec.DevLinks {
 			for _, link := range devLinks.Links {
-				klog.Infof("Comparing devLink %s with link %s", devLink, link)
+				klog.Infof("Comparing devLink %s with link %s", devlink, link)
 				if strings.Contains(devlink, link) {
 					ok, err := c.verifyBDStatus(bd, hostname)
 					if err != nil {
