@@ -181,7 +181,7 @@ func (c *CSPCMigrator) findBDforDevlink(devlink, hostname string) (string, error
 	}
 	for _, bd := range bds.Items {
 		if bd.Spec.Path != "" {
-			klog.Infof("Comparing devLink %s with path %s", devink, bd.Spec.Path)
+			klog.Infof("Comparing devLink %s with path %s", devlink, bd.Spec.Path)
 			if strings.Contains(devlink, bd.Spec.Path) {
 				ok, err := c.verifyBDStatus(bd, hostname)
 				if err != nil {
